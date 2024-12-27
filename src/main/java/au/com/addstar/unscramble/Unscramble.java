@@ -483,12 +483,12 @@ public class Unscramble extends Plugin implements Listener
 	}
 
 	public static void logMsg(String msg) {
-		instance.getLogger().info(msg);
+		instance.getLogger().info("[Unscramble] " + msg);
 	}
 
 	public static void debugMsg(String msg) {
 		if (instance.mDebug) {
-			instance.getLogger().info(msg);
+			instance.getLogger().info("[Unscramble] " + msg);
 		}
 	}
 
