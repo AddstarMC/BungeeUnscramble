@@ -76,6 +76,19 @@ public class Unscramble extends Plugin implements Listener
 	@Override
 	public void onDisable()
 	{
+		if (mCurrentSession != null) {
+			mCurrentSession.stop();
+			mCurrentSession = null;
+		}
+
+		if (mAutoGameTask != null) {
+			mAutoGameTask.cancel();
+			mAutoGameTask = null;
+		}
+
+		if (mDBManager != null) {
+			mDBManager.close();
+		}
 	}
 
 	private void loadAutoGame()
@@ -285,10 +298,8 @@ public class Unscramble extends Plugin implements Listener
 		if(!event.getTag().equals("Unscramble"))
 			return;
 
-		ByteArrayInputStream stream = new ByteArrayInputStream(event.getData());
-		DataInputStream input = new DataInputStream(stream);
-
-		try
+		try (ByteArrayInputStream stream = new ByteArrayInputStream(event.getData());
+			DataInputStream input = new DataInputStream(stream))
 		{
 			String subChannel = input.readUTF();
 			int session = input.readInt();
