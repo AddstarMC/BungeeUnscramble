@@ -27,7 +27,9 @@ public class DatabaseManager {
     }
 
     public void close() {
-        dataSource.close();
+        if (dataSource != null) {
+            dataSource.close();
+        }
     }
 
     public void saveRecord(PlayerRecord rec) {
@@ -77,10 +79,8 @@ public class DatabaseManager {
                     int totalpoints = resultSet.getInt("totalpoints");
                     int points = resultSet.getInt("points");
                     int wins = resultSet.getInt("wins");
-                    resultSet.close();
                     return new PlayerRecord(id, totalpoints, points, wins);
                 } else {
-                    resultSet.close();
                     return new PlayerRecord(id, 0, 0, 0);
                 }
             }
@@ -90,7 +90,7 @@ public class DatabaseManager {
         return null;
     }
 
-    class PlayerRecord {
+    public static class PlayerRecord {
         private UUID id;
         private int points;
         private int totalpoints;

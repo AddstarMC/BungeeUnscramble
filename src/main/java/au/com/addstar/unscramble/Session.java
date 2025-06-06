@@ -39,7 +39,7 @@ public class Session implements Runnable
 	
 	private int mChatLines = 0;
 
-	private final Pattern STRIP_COLOR_PATTERN;
+	private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)[&\u00A7][0-9A-FK-OR]");
 
 	// Define Scrabble letter values
 	private static final Map<Character, Integer> scrabbleValues = new HashMap<>();
@@ -110,8 +110,6 @@ public class Session implements Runnable
 		mHint = word.replaceAll("[^ ]", "*");
 		mHintInterval = hintInterval;
 		mHintChars = hintChars;
-
-		STRIP_COLOR_PATTERN = Pattern.compile("(?i)[&\u00A7][0-9A-FK-OR]");
 
 		mPrize = prize;
 		scramble();
