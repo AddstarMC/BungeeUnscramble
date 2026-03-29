@@ -1,6 +1,10 @@
-/.idea
+/.idea/
+/.claude/
+/.cursor/
+/.vscode/
 /.classpath
 /.project
 /.settings
 /target
 BungeeUnscramble.iml
+workspace.xml
